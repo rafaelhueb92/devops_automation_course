@@ -1,11 +1,27 @@
-## Shell setup (Bash/Zsh) — load functions with `source`
+# DevOps Automation Course - Ieso Dias
 
-### Which file to use
-- **Linux (Bash):** `~/.bashrc`
-- **macOS (Zsh default):** `~/.zshrc`
+This repository contains materials and resources for the **DevOps Automation Course** by **Ieso Dias**.
 
-### 1) Put your functions in a file (recommended)
-Create a script in your home folder, for example:
-```bash
-nano ~/my_functions.sh
-```
+## Status
+
+🚧 **Under Construction** 🚧
+
+This repository is currently being developed. Content, examples, and documentation are being added regularly.
+
+## About
+
+This course covers DevOps automation practices, tools, and methodologies to streamline development and deployment workflows.
+
+## Coming Soon
+
+- Course materials
+- Code examples
+- Configuration files
+- Best practices guides
+- Hands-on exercises
+
+---
+
+**Instructor:** Ieso Dias
+
+Stay tuned for updates!
