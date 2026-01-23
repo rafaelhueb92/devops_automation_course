@@ -1,3 +1,0 @@
-erro:fail
-info: ok
-warning: careful
