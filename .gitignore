@@ -1,0 +1,5 @@
+*.cvs
+*.terraform
+.terraform/
+node_modules
+__pycache__
