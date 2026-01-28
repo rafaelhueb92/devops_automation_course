@@ -11,11 +11,10 @@ resource "helm_release" "keda" {
   chart      = "keda"
   version    = "2.13.2"
 
-  values = [
-    <<EOF
-replicaCount: 1
-EOF
-  ]
+  set {
+    name  = "replicaCount"
+    value = 1
+  }
 
   depends_on = [kubernetes_namespace.keda]
 }
