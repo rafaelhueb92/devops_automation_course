@@ -7,7 +7,7 @@ resource "azurerm_public_ip" "public_ip" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = var.location
   allocation_method   = "Static"
-  sku                 = "Basic"
+  sku                 = local.ip_sku
 }
 
 
@@ -49,7 +49,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
   disable_password_authentication = false
-  network_interace_ids = [
+  network_interface_ids = [
     azurerm_network_interface.nic.id
   ]
   os_disk {
@@ -59,8 +59,31 @@ resource "azurerm_linux_virtual_machine" "vm" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
-    ski       = "20_04-lts"
+    sku       = "20_04-lts"
     version   = "latest"
   }
 
+}
+
+resource "azurerm_network_security_group" "nsg" {
+  name                = "devops-nsg"
+  location            = var.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "Allow-SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "nic_nsg" {
+  network_interface_id      = azurerm_network_interface.nic.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
